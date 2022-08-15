@@ -13,15 +13,15 @@
         <div>
           <p class="parameter">Minimum Score</p>
           <mat-form-field appearance="fill">
-            <input min="1" max="10" type="text" matInput formControlName="score" placeholder="1-10">
+            <input min="1" max="100" type="number" matInput formControlName="score" placeholder="1-100">
           </mat-form-field>
         </div>
 
         <div>
           <p class="parameter">Order By</p>
           <div>
-            <mat-icon (click)="toggleOrder()" *ngIf="!isAscending">arrow_downward</mat-icon>
-            <mat-icon (click)="toggleOrder()" *ngIf="isAscending">arrow_upward</mat-icon>
+            <mat-icon class="arrow-icon" (click)="toggleOrder()" *ngIf="!isAscending">arrow_downward</mat-icon>
+            <mat-icon class="arrow-icon" (click)="toggleOrder()" *ngIf="isAscending">arrow_upward</mat-icon>
             <mat-form-field class="dropdown-field" appearance="fill">
               <mat-select formControlName="parameter" (selectionChange)="setParameter()">
                 <mat-option [value]="parameter" *ngFor="let parameter of parameters">{{ parameter }}</mat-option>

@@ -137,6 +137,10 @@ mat-form-field {
   width: 100%;
 }
 
+.arrow-icon {
+  cursor: pointer;
+}
+
 ::ng-deep .mat-form-field {
   .mat-input-element {
     color: $textColor;
