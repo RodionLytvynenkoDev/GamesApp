@@ -1,1 +1,5 @@
-export enum ORDER_PARAMETERS {'Release Date', 'Score', 'Name'}
+export enum OrderParameters {
+  ReleaseDate = 'Release Date',
+  Score = 'Score',
+  Name = 'Name'
+}

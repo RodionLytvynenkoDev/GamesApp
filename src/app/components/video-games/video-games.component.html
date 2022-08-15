@@ -1,0 +1,53 @@
+<div class="games-container">
+  <div class="settings">
+    <p class="settings-title">Filter results</p>
+
+    <form class="settings-form" [formGroup]="sortingForm">
+      <p class="parameter">Name (contains)</p>
+      <mat-form-field appearance="fill">
+        <input type="text" matInput formControlName="name" placeholder="Text string">
+      </mat-form-field>
+
+      <div class="settings-bottom">
+
+        <div>
+          <p class="parameter">Minimum Score</p>
+          <mat-form-field appearance="fill">
+            <input min="1" max="10" type="text" matInput formControlName="score" placeholder="1-10">
+          </mat-form-field>
+        </div>
+
+        <div>
+          <p class="parameter">Order By</p>
+          <div>
+            <mat-icon (click)="toggleOrder()" *ngIf="!isAscending">arrow_downward</mat-icon>
+            <mat-icon (click)="toggleOrder()" *ngIf="isAscending">arrow_upward</mat-icon>
+            <mat-form-field class="dropdown-field" appearance="fill">
+              <mat-select formControlName="parameter" (selectionChange)="setParameter()">
+                <mat-option [value]="parameter" *ngFor="let parameter of parameters">{{ parameter }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="button-container">
+          <button (click)="clearForm()">Clear</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="games-content">
+    <div *ngFor="let game of data$ | async | filterAll: sortingForm.value.name | scoreFilter: sortingForm.controls['score'].value | sort: criteria" class="games-content-item">
+      <div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Black_colour.jpg/800px-Black_colour.jpg" alt="black logo">
+      </div>
+      <div class="game-info">
+        <div>
+          <p class="game-title">{{game.name}}</p>
+          <p class="game-release">Release Date: {{game.first_release_date | date:'dd/MM/yyyy'}}</p>
+          <div class="game-summary">[Summary] {{game.summary}}</div>
+        </div>
+        <div class="game-rating">{{game.rating | number: '1.0-0'}}</div>
+      </div>
+    </div>
+  </div>
+</div>
